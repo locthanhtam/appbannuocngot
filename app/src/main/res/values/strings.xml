@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Quản Lý Nước Ngọt</string>
+    <string name="store_name">Đại Lý Nước Giải Khát</string>
+    <string name="product_count">Tổng kho: 1,500 thùng</string>
+    <string name="total_value">Tổng giá trị: 150,000,000 VNĐ</string>
+    <string name="btn_product_list">Danh sách mặt hàng</string>
+    <string name="btn_add_product">Thêm nước ngọt mới</string>
+    <string name="btn_login">Đăng nhập</string>
+    <string name="btn_exit">Thoát</string>
+    <string name="logo_desc">Logo đại lý</string>
+</resources>
