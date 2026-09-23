@@ -1,12 +1,10 @@
 package com.example.myapplication;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import java.text.DecimalFormat;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class ProductListActivity extends AppCompatActivity {
 
@@ -15,35 +13,17 @@ public class ProductListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_list);
 
-        LinearLayout container = findViewById(R.id.layoutContainer);
-        DecimalFormat formatter = new DecimalFormat("#,###");
+        RecyclerView rcvProducts = findViewById(R.id.rcvProducts);
 
-        for (Product p : DataManager.productList) {
-            LinearLayout itemLayout = new LinearLayout(this);
-            itemLayout.setOrientation(LinearLayout.VERTICAL);
-            itemLayout.setBackgroundColor(Color.WHITE);
-            itemLayout.setPadding(24, 20, 24, 20);
+        // Chia lưới thành 2 cột
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
+        rcvProducts.setLayoutManager(gridLayoutManager);
 
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.setMargins(0, 0, 0, 16);
-            itemLayout.setLayoutParams(params);
-
-            TextView tvTitle = new TextView(this);
-            tvTitle.setText("🥤 " + p.getName() + " (" + p.getBrand() + ")");
-            tvTitle.setTextSize(16);
-            tvTitle.setTextColor(Color.BLACK);
-
-            TextView tvDetails = new TextView(this);
-            tvDetails.setText("💰 Giá: " + formatter.format(p.getPrice()) + " VNĐ   |   📦 Kho: " + p.getQuantity());
-            tvDetails.setTextSize(14);
-            tvDetails.setTextColor(Color.DKGRAY);
-            tvDetails.setPadding(0, 6, 0, 0);
-
-            itemLayout.addView(tvTitle);
-            itemLayout.addView(tvDetails);
-            container.addView(itemLayout);
-        }
+        // Đã bổ sung thêm hành động khi bấm nút "+ Mua" để hết báo lỗi
+        ProductAdapter productAdapter = new ProductAdapter(DataManager.productList, product -> {
+            Toast.makeText(ProductListActivity.this, "Đã thêm " + product.getName() + " vào giỏ!", Toast.LENGTH_SHORT).show();
+        });
+        rcvProducts.setAdapter(productAdapter);
 
         findViewById(R.id.btnBackHome).setOnClickListener(v -> finish());
     }

@@ -1,7 +1,6 @@
 package com.example.myapplication;
 
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,7 +31,7 @@ public class AddProductActivity extends AppCompatActivity {
             long price = Long.parseLong(strPrice);
             int qty = Integer.parseInt(strQty);
 
-            DataManager.productList.add(0, new Product(name, brand, price, qty));
+            DataManager.productList.add(0, new Product(name, brand, price, qty, R.drawable.logo_store));
             Toast.makeText(this, "Đã lưu " + name + " vào kho!", Toast.LENGTH_SHORT).show();
             finish();
         });
