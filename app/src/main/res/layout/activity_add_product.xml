@@ -3,73 +3,100 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20dp"
-    android:background="#FFFFFF">
+    android:background="#F5F5F5"
+    android:fitsSystemWindows="true">
 
-    <TextView
+    <!-- Header màu cam -->
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="THÊM SẢN PHẨM MỚI"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:textColor="#1976D2"
-        android:gravity="center"
-        android:layout_marginBottom="20dp" />
+        android:layout_height="60dp"
+        android:background="#EE4D2D"
+        android:padding="10dp">
 
-    <EditText
-        android:id="@+id/edtProductName"
+        <TextView
+            android:id="@+id/btnBackAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⬅ Trở về"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            android:padding="5dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="THÊM SẢN PHẨM"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+
+    <!-- Nội dung Form (cho vào ScrollView để cuộn được nếu màn hình nhỏ) -->
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:hint="Tên sản phẩm"
-        android:layout_marginBottom="12dp"
-        android:background="#F5F5F5"
-        android:padding="10dp"/>
+        android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/edtBrand"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:hint="Thương hiệu"
-        android:layout_marginBottom="12dp"
-        android:background="#F5F5F5"
-        android:padding="10dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:background="#FFFFFF">
 
-    <EditText
-        android:id="@+id/edtPrice"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:hint="Giá bán (VNĐ)"
-        android:inputType="number"
-        android:layout_marginBottom="12dp"
-        android:background="#F5F5F5"
-        android:padding="10dp"/>
+            <!-- 1. Mã sản phẩm -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Mã sản phẩm (*)" android:textStyle="bold" android:textColor="#333333"/>
+            <EditText android:id="@+id/edtProductId" android:layout_width="match_parent" android:layout_height="45dp" android:hint="Nhập mã SP..." android:background="#F0F0F0" android:paddingLeft="10dp" android:layout_marginTop="5dp" android:layout_marginBottom="15dp"/>
 
-    <EditText
-        android:id="@+id/edtQuantity"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:hint="Số lượng"
-        android:inputType="number"
-        android:layout_marginBottom="24dp"
-        android:background="#F5F5F5"
-        android:padding="10dp"/>
+            <!-- 2. Tên sản phẩm -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Tên sản phẩm (*)" android:textStyle="bold" android:textColor="#333333"/>
+            <EditText android:id="@+id/edtProductName" android:layout_width="match_parent" android:layout_height="45dp" android:hint="Nhập tên SP..." android:background="#F0F0F0" android:paddingLeft="10dp" android:layout_marginTop="5dp" android:layout_marginBottom="15dp"/>
 
-    <Button
-        android:id="@+id/btnSave"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="LƯU SẢN PHẨM"
-        android:backgroundTint="#4CAF50"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="10dp" />
+            <!-- 3. Giá sản phẩm -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Giá bán (VNĐ) (*)" android:textStyle="bold" android:textColor="#333333"/>
+            <EditText android:id="@+id/edtPrice" android:layout_width="match_parent" android:layout_height="45dp" android:hint="Nhập giá (VD: 15000)" android:inputType="numberDecimal" android:background="#F0F0F0" android:paddingLeft="10dp" android:layout_marginTop="5dp" android:layout_marginBottom="15dp"/>
 
-    <Button
-        android:id="@+id/btnCancel"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="HỦY BỎ"
-        android:backgroundTint="#9E9E9E"
-        android:textSize="16sp" />
+            <!-- 4. Số lượng -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Số lượng trong kho (*)" android:textStyle="bold" android:textColor="#333333"/>
+            <EditText android:id="@+id/edtQuantity" android:layout_width="match_parent" android:layout_height="45dp" android:hint="Nhập số lượng..." android:inputType="number" android:background="#F0F0F0" android:paddingLeft="10dp" android:layout_marginTop="5dp" android:layout_marginBottom="15dp"/>
 
+            <!-- 5. Loại sản phẩm -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Loại sản phẩm" android:textStyle="bold" android:textColor="#333333"/>
+            <Spinner android:id="@+id/spinnerCategory" android:layout_width="match_parent" android:layout_height="45dp" android:background="#F0F0F0" android:layout_marginTop="5dp" android:layout_marginBottom="15dp"/>
+
+            <!-- 6. Ngày nhập -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Ngày nhập kho" android:textStyle="bold" android:textColor="#333333"/>
+            <TextView android:id="@+id/tvImportDate" android:layout_width="match_parent" android:layout_height="45dp" android:text="Chọn ngày 📅" android:gravity="center_vertical" android:background="#F0F0F0" android:paddingLeft="10dp" android:textColor="#333333" android:layout_marginTop="5dp" android:layout_marginBottom="15dp" android:clickable="true" android:focusable="true"/>
+
+            <!-- 7. Trạng thái -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Trạng thái" android:textStyle="bold" android:textColor="#333333"/>
+            <RadioGroup android:id="@+id/rgStatus" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="5dp" android:layout_marginBottom="15dp">
+                <RadioButton android:id="@+id/rbSelling" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Đang bán" android:checked="true" android:buttonTint="#EE4D2D"/>
+                <RadioButton android:id="@+id/rbStopped" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Ngừng bán" android:layout_marginLeft="20dp" android:buttonTint="#EE4D2D"/>
+            </RadioGroup>
+
+            <!-- 8. Hình ảnh -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Hình ảnh minh họa" android:textStyle="bold" android:textColor="#333333"/>
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="5dp" android:layout_marginBottom="25dp" android:gravity="center_vertical">
+                <ImageView android:id="@+id/ivProductPreview" android:layout_width="60dp" android:layout_height="60dp" android:background="#E0E0E0" android:src="@android:drawable/ic_menu_camera" android:padding="15dp"/>
+                <Button android:id="@+id/btnSelectImage" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Chọn ảnh" android:backgroundTint="#999999" android:textColor="#FFFFFF" android:layout_marginLeft="15dp"/>
+            </LinearLayout>
+
+            <!-- Nút Lưu -->
+            <Button
+                android:id="@+id/btnSaveProduct"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:text="LƯU SẢN PHẨM"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#EE4D2D"
+                android:textStyle="bold"
+                android:textSize="18sp"/>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

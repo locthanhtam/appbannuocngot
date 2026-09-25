@@ -101,12 +101,13 @@
                 android:textStyle="bold"
                 android:textSize="14sp" />
 
+            <!-- ĐÃ THAY ẢNH LOGO THÀNH MÃ QR CỦA BẠN Ở ĐÂY -->
             <ImageView
                 android:id="@+id/imgQRCode"
                 android:layout_width="140dp"
                 android:layout_height="140dp"
                 android:layout_marginTop="8dp"
-                android:src="@drawable/logo_store"
+                android:src="@drawable/ma_qr_chuyenkhoan"
                 android:scaleType="fitCenter" />
 
             <TextView

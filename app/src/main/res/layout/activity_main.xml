@@ -3,49 +3,117 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F5F5F5"
-    android:fitsSystemWindows="true"> <!-- Lệnh này giúp tự động lùi xuống né camera -->
+    android:fitsSystemWindows="true"> <!-- DÒNG LỆNH "THẦN THÁNH" NÉ CAMERA CHÍNH LÀ Ở ĐÂY -->
 
-    <!-- 1. THANH TÌM KIẾM TRÊN CÙNG -->
-    <LinearLayout
-        android:id="@+id/topBar"
+    <!-- Vùng nội dung cuộn được (Cuộn lên cuộn xuống) -->
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#FFFFFF"
-        android:padding="10dp"
-        android:gravity="center_vertical"
-        android:elevation="2dp">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomNav">
 
-        <EditText
-            android:id="@+id/edtSearch"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="40dp"
-            android:background="#F0F0F0"
-            android:hint="🔍 Tìm kiếm sản phẩm..."
-            android:textColorHint="#999999"
-            android:textColor="#333333"
-            android:paddingLeft="10dp"
-            android:textSize="14sp"
-            android:singleLine="true" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <!-- Nút Giỏ hàng đã được làm to, dễ bấm và có hiệu ứng gợn sóng -->
-        <TextView
-            android:id="@+id/tvCartShopee"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="🛒 0"
-            android:textColor="#EE4D2D"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:paddingLeft="15dp"
-            android:paddingRight="10dp"
-            android:gravity="center"
-            android:background="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            android:focusable="true" />
-    </LinearLayout>
+            <!-- THANH TÌM KIẾM VÀ GIỎ HÀNG Ở TRÊN CÙNG -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="#FFFFFF"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:gravity="center_vertical"
+                android:elevation="2dp">
 
-    <!-- 2. THANH ĐIỀU HƯỚNG DƯỚI ĐÁY -->
+                <EditText
+                    android:id="@+id/edtSearch"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:background="#F0F0F0"
+                    android:hint="🔍 Tìm kiếm sản phẩm..."
+                    android:paddingLeft="10dp"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvCartShopee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="10dp"
+                    android:text="🛒 0"
+                    android:textColor="#EE4D2D"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- MENU TIỆN ÍCH (ShopeePay, Điểm danh...) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                android:orientation="vertical"
+                android:padding="15dp"
+                android:layout_marginTop="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/btnShopeePay"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="💳\nShopeePay"
+                        android:gravity="center"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/btnDiemDanh"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="💰\nĐiểm danh"
+                        android:gravity="center"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/btnSPayLater"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="📉\nSPayLater"
+                        android:gravity="center"
+                        android:textSize="11sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- TIÊU ĐỀ "GỢI Ý HÔM NAY" -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="GỢI Ý HÔM NAY"
+                android:textColor="#EE4D2D"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:padding="15dp"
+                android:background="#FFFFFF"
+                android:layout_marginTop="8dp" />
+
+            <!-- LƯỚI SẢN PHẨM -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvProducts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:padding="5dp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- THANH ĐIỀU HƯỚNG DƯỚI ĐÁY (BOTTOM NAVIGATION) -->
     <LinearLayout
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
@@ -56,10 +124,43 @@
         android:orientation="horizontal"
         android:paddingTop="6dp">
 
-        <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:text="🏠\nHome" android:gravity="center_horizontal" android:textColor="#EE4D2D" android:textSize="11sp" android:textStyle="bold"/>
-        <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:text="🛍️\nMall" android:gravity="center_horizontal" android:textColor="#666666" android:textSize="11sp"/>
-        <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:text="▶️\nVideo" android:gravity="center_horizontal" android:textColor="#666666" android:textSize="11sp"/>
-        <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:text="🔔\nThông báo" android:gravity="center_horizontal" android:textColor="#666666" android:textSize="11sp"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="🏠\nHome"
+            android:gravity="center_horizontal"
+            android:textColor="#EE4D2D"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="🛍️\nMall"
+            android:gravity="center_horizontal"
+            android:textColor="#666666"
+            android:textSize="11sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="▶️\nVideo"
+            android:gravity="center_horizontal"
+            android:textColor="#666666"
+            android:textSize="11sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="🔔\nThông báo"
+            android:gravity="center_horizontal"
+            android:textColor="#666666"
+            android:textSize="11sp" />
+
         <TextView
             android:id="@+id/btnProfile"
             android:layout_width="0dp"
@@ -68,64 +169,7 @@
             android:text="👤\nTôi"
             android:gravity="center_horizontal"
             android:textColor="#666666"
-            android:textSize="11sp"/>
+            android:textSize="11sp" />
     </LinearLayout>
 
-    <!-- 3. PHẦN NỘI DUNG CUỘN Ở GIỮA -->
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/topBar"
-        android:layout_above="@id/bottomNav">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <!-- Các nút tiện ích đã thêm ID -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#FFFFFF"
-                android:padding="12dp"
-                android:orientation="horizontal">
-                <TextView android:id="@+id/btnShopeePay" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="💳\nShopeePay" android:gravity="center" android:textSize="11sp"/>
-                <TextView android:id="@+id/btnDiemDanh" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="💰\nĐiểm danh" android:gravity="center" android:textSize="11sp"/>
-                <TextView android:id="@+id/btnSPayLater" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="📉\nSPayLater" android:gravity="center" android:textSize="11sp"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#FFFFFF"
-                android:paddingBottom="12dp"
-                android:orientation="horizontal">
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="🍔\nFood" android:gravity="center" android:textSize="11sp"/>
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="🛒\nMart" android:gravity="center" android:textSize="11sp"/>
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="👑\nVIP" android:gravity="center" android:textSize="11sp"/>
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="🔥\nSiêu Rẻ" android:gravity="center" android:textSize="11sp"/>
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="GỢI Ý HÔM NAY"
-                android:textColor="#EE4D2D"
-                android:textStyle="bold"
-                android:textSize="15sp"
-                android:padding="12dp"
-                android:background="#FFFFFF"
-                android:layout_marginTop="8dp"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rcvProducts"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="4dp"
-                android:clipToPadding="false"
-                android:nestedScrollingEnabled="false" />
-
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
 </RelativeLayout>

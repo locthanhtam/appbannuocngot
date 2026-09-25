@@ -13,19 +13,24 @@ import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
-    public interface OnBuyClickListener {
-        void onBuyClick(Product product);
+    private List<Product> productList;
+    private OnItemClickListener listener;
+    private OnItemLongClickListener longClickListener;
+
+    public interface OnItemClickListener {
+        void onItemClick(Product product);
     }
 
-    private List<Product> productList;
-    private OnBuyClickListener listener;
+    public interface OnItemLongClickListener {
+        void onItemLongClick(Product product, int position);
+    }
 
-    public ProductAdapter(List<Product> productList, OnBuyClickListener listener) {
+    public ProductAdapter(List<Product> productList, OnItemClickListener listener, OnItemLongClickListener longClickListener) {
         this.productList = productList;
         this.listener = listener;
+        this.longClickListener = longClickListener;
     }
 
-    // HÀM MỚI: Tự động cập nhật lại danh sách khi gõ tìm kiếm
     public void filterList(List<Product> filteredList) {
         this.productList = filteredList;
         notifyDataSetChanged();
@@ -41,24 +46,31 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Product product = productList.get(position);
-        if (product == null) return;
 
-        holder.imgProduct.setImageResource(product.getImageResId());
         holder.tvProductName.setText(product.getName());
-
         DecimalFormat formatter = new DecimalFormat("#,###");
         holder.tvProductPrice.setText(formatter.format(product.getPrice()) + " đ");
 
-        holder.btnBuyItem.setOnClickListener(v -> {
-            if (listener != null) {
-                listener.onBuyClick(product);
+        // ĐÂY LÀ DÒNG LỆNH MỚI ĐỂ HIỂN THỊ ĐÚNG ẢNH CỦA TỪNG SẢN PHẨM:
+        // Lưu ý: Nếu chữ getImage() bị đỏ, hãy đổi nó thành tên hàm trong file Product.java của bạn (Ví dụ: getHinhAnh() hoặc getImg() ...)
+        holder.imgProduct.setImageResource(product.getImage());
+
+        // Bấm vào nút "+ Mua" hoặc ô sản phẩm
+        holder.itemView.setOnClickListener(v -> listener.onItemClick(product));
+        holder.btnBuyItem.setOnClickListener(v -> listener.onItemClick(product));
+
+        // Nhấn giữ lâu
+        holder.itemView.setOnLongClickListener(v -> {
+            if (longClickListener != null) {
+                longClickListener.onItemLongClick(product, holder.getAdapterPosition());
             }
+            return true;
         });
     }
 
     @Override
     public int getItemCount() {
-        return productList != null ? productList.size() : 0;
+        return productList.size();
     }
 
     public static class ProductViewHolder extends RecyclerView.ViewHolder {

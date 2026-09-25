@@ -7,15 +7,15 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:label="Quản Lý Nước Giải Khát"
+        android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
 
-        <!-- Mở đầu bằng LoginActivity -->
+        <!-- MÀN HÌNH CHÍNH (HOME) CHẠY ĐẦU TIÊN -->
         <activity
-            android:name=".LoginActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,9 +23,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainActivity" android:exported="false" />
-        <activity android:name=".ProductListActivity" android:exported="false" />
-        <activity android:name=".AddProductActivity" android:exported="false" />
-
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".AddProductActivity" />
     </application>
+
 </manifest>
